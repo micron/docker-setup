@@ -12,4 +12,4 @@ cd $TMP_SETUP_DIR
 
 git clone --depth 1 git@github.com:micron/docker-setup.git .
 
-rsync -rv --ignore-existing . $CURRENT_PWD/
+rsync -rv --ignore-existing --exclude=./init.sh . $CURRENT_PWD/
