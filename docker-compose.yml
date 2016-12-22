@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:5.6
+    volumes:
+      - ./docker/lib/mysql:/var/lib/mysql
+      - ./docker/dumps:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: application
+      MYSQL_DATABASE: application
+      MYSQL_USER: application
+      MYSQL_PASSWORD: application
+  wordpress:
+    depends_on:
+      - db
+      - php7
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8088:80
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: application
+  php7:
+    image: miron/php7-custom:latest
+    restart: always
+    environment:
+      XDEBUG_CONFIG: remote_port=9002 remote_connect_back=1 idekey=PHPSTORM remote_host=172.17.0.1 remote_enable=1 idekey=PHPSTORM
+    expose:
+      - "9000"
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./:/var/www/html
+  grid:
+    image: miron/selenium
+    shm_size: 1g
+    ports:
+      - "4444:24444"
+      - "5920:25900"
+    environment:
+      - VNC_PASSWORD=hola
+      - VIDEO=true
+    links:
+      - wordpress:application
