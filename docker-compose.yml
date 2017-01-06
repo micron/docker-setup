@@ -15,7 +15,7 @@ services:
   wordpress:
     depends_on:
       - db
-      - php7
+      - php
     image: nginx:latest
     volumes:
       - ./:/var/www/html
@@ -26,7 +26,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_PASSWORD: application
-  php7:
+  php:
     image: miron/php7-custom:latest
     restart: always
     environment:
