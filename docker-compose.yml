@@ -12,7 +12,7 @@ services:
       MYSQL_DATABASE: application
       MYSQL_USER: application
       MYSQL_PASSWORD: application
-  wordpress:
+  application:
     depends_on:
       - db
       - php
@@ -47,4 +47,4 @@ services:
       - VNC_PASSWORD=hola
       - VIDEO=true
     links:
-      - wordpress:application
+      - application:application
