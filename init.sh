@@ -12,7 +12,7 @@ fi
 
 cd $TMP_SETUP_DIR
 
-git clone --depth 1 git@github.com:micron/docker-setup.git .
+git clone --depth 1 https://github.com/micron/docker-setup.git .
 
 rsync -rv --ignore-existing --exclude='./init.sh' --exclude='.git' . $CURRENT_PWD/
 
