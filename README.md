@@ -15,6 +15,7 @@ If you're lazy like me I suggest that you create an alias for this command:
 When all is done you'll have the following files and folders in your project directory:
 
     ├── docker                          # holds the configurations files
+    │   ├── run-mysql-dump.sh           # mysql dump script
     │   ├── dumps                       # imports everything with an .sql or .sql.gz suffix into the database on initial startup
     │   ├── lib                         # mysql /var/lib/mysql directory for data persistance
     │   │   └── mysql
@@ -51,3 +52,9 @@ Since the port 9000 is already taken by the php-fpm service you have to listen o
 This docker-compose setup comes with an [selenium container](https://github.com/elgalu/docker-selenium). It listens on port 4444 on your local machine.
 You can also connect to the container with a [vnc-viewer client](https://www.realvnc.com/download/viewer/)
 
+## Database
+
+### Create a snapshot
+
+If you want to create a snapshot from the current ``application`` database cd into the docker directory and run ``./dump-mysql.sh``.
+You'll be asked which container you want to run. **WARNING** The destination file in the dumps directory will be overriden wothout asking.
