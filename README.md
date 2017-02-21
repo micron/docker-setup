@@ -57,4 +57,4 @@ You can also connect to the container with a [vnc-viewer client](https://www.rea
 ### Create a snapshot
 
 If you want to create a snapshot from the current ``application`` database cd into the docker directory and run ``./dump-mysql.sh``.
-You'll be asked which container you want to run. **WARNING** The destination file in the dumps directory will be overriden wothout asking.
+You'll be asked which container you want to run. **WARNING** The destination file in the dumps directory will be overriden without asking.
