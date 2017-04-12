@@ -1,2 +1,2 @@
-lib/mysql/*
-!lib/mysql/.gitkeep
+mysql/*
+mysql/.gitkeep
