@@ -40,6 +40,22 @@ The application listens on your localhost on port 8088. When everything worked y
 
 To read the logs from an running container just type ``docker logs -f application_wordpress_1``.
 
+#### Loggin in php the php container
+
+To read the whole log stream from a php container you can do the following:
+
+``docker logs -f application_php_1``
+
+To display only errors in the stream:
+
+``docker logs -f application_php_1 >/dev/null``
+
+To display only the access log in the stream:
+
+``docker logs -f application_php_1 2>/dev/null``
+
+[Source](https://github.com/docker-library/php/issues/212#issuecomment-204817907)
+
 ### Debugging
 
 Our php images come always bundled with xdebug. Unfortunately you need to make a modification in the nginx config under ``docker/nginx/default.conf``.
