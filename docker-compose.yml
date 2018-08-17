@@ -30,7 +30,7 @@ services:
     image: miron/php7-custom:latest
     restart: always
     environment:
-      XDEBUG_CONFIG: remote_port=9002 remote_connect_back=1 idekey=PHPSTORM remote_host=172.17.0.1 remote_enable=1 idekey=PHPSTORM
+      XDEBUG_CONFIG: remote_port=9002 remote_connect_back=0 idekey=PHPSTORM remote_host=host.docker.internal remote_enable=1 idekey=PHPSTORM
     expose:
       - "9000"
     ports:
