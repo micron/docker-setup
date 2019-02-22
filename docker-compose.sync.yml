@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.6
+    volumes:
+      - ./docker/dumps:/docker-entrypoint-initdb.d
+    restart: always
+    ports:
+      - 3305:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: application
+      MYSQL_DATABASE: application
+      MYSQL_USER: application
+      MYSQL_PASSWORD: application
+  application:
+    depends_on:
+      - db
+      - php
+    image: nginx:latest
+    volumes:
+      - kr-native-90er-sync:/var/www/html:nocopy
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8088:8088
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: application
+  php:
+    image: miron/php7-custom:latest
+    restart: always
+    environment:
+      XDEBUG_CONFIG: remote_port=9002 remote_connect_back=1 idekey=PHPSTORM remote_host=172.17.0.1 remote_enable=1 idekey=PHPSTORM
+    expose:
+      - "9000"
+    ports:
+      - "9001:9001"
+    volumes:
+      - kr-native-90er-sync:/var/www/html:nocopy
+    command: php-fpm -R
+volumes:
+  kr-native-90er-sync:
+    external: true
