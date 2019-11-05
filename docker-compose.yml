@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: mysql:5.6
+    user: "${UID}:${GID}"
     volumes:
       - ./docker/lib/mysql:/var/lib/mysql
       - ./docker/dumps:/docker-entrypoint-initdb.d
@@ -28,6 +29,7 @@ services:
       WORDPRESS_DB_PASSWORD: application
   php:
     image: miron/php7-custom:latest
+    user: "${UID}:${GID}"
     restart: always
     environment:
       XDEBUG_CONFIG: remote_port=9002 remote_connect_back=0 idekey=PHPSTORM remote_host=host.docker.internal remote_enable=1 idekey=PHPSTORM
