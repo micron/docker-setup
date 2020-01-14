@@ -28,6 +28,8 @@ services:
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_PASSWORD: application
+    sysctls:
+      - net.ipv4.ip_unprivileged_port_start=0
   php:
     image: miron/php7-custom:latest
     user: "${UID}:${GID}"
