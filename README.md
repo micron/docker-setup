@@ -16,6 +16,7 @@ When all is done you'll have the following files and folders in your project dir
 
     ├── docker                          # holds the configurations files
     │   ├── run-mysql-dump.sh           # mysql dump script
+    │   ├── reset-wp-user.sh            # Tries to reset the WP user using WP-Cli
     │   ├── dumps                       # imports everything with an .sql or .sql.gz suffix into the database on initial startup
     │   ├── lib                         # mysql /var/lib/mysql directory for data persistance
     │   │   └── mysql
@@ -72,5 +73,12 @@ You can also connect to the container with a [vnc-viewer client](https://www.rea
 
 ### Create a snapshot
 
-If you want to create a snapshot from the current ``application`` database cd into the docker directory and run ``./dump-mysql.sh``.
-You'll be asked which container you want to run. **WARNING** The destination file in the dumps directory will be overriden without asking.
+If you want to create a snapshot from the current ``application`` database cd into the docker directory and run ``./run-mysql-dump.sh``.
+This should automatically pick the right database. If that is not the case you can overwrite the input by typing in something else.
+
+**WARNING** The destination file in the dumps directory will be overriden.
+
+### Reset the admin user
+
+If you want to reset the admin password change to the ``./docker/`` directory and run ``./reset-wp-user.sh``.
+This resets the password of the selected user to ``asdf1234``.
